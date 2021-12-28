@@ -1,0 +1,142 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f8f8f8;
+  background-image: linear-gradient(to left, rgba(89, 222, 195), rgba(179, 230, 219));
+  font-family: 'McLaren', cursive;
+}
+
+::-moz-selection {
+  background-color: #1abc9c;
+  color: #fff
+}
+
+::selection {
+  background-color: #1abc9c;
+  color: #fff
+}
+
+.form-signup {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signup .checkbox {
+  font-weight: 400;
+}
+.form-signup .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signup .form-control:focus {
+  z-index: 2;
+}
+
+.signup{
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0;
+  position: absolute;
+  top: 472px;
+  left: 603px
+}
+
+.logIn{
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0;
+  position: absolute;
+  top: 450px;
+  left: 603px
+}
+
+.forgot-password{
+  position: absolute;
+  top: 504px;
+  left: 662px;
+}
+
+.btn {
+  text-transform: capitalize;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 0;
+  padding: 20px;
+  transition: color 0.4s linear;
+  position: relative;
+  z-index: 1;
+  border: 0;
+  overflow: hidden
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #1abc9c;
+  z-index: 1;
+  border-radius: 5px;
+  transition: transform 0.5s;
+  transition-timing-function: ease;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0)
+}
+
+.btn:hover {
+  color: #fff
+}
+
+.btn:hover::before {
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+  color: #fff !important;
+  z-index: -1
+}
+
+.btn:focus {
+  outline: 0;
+  box-shadow: none
+}
+
+
+#fullName{
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#inputEmail{
+  border-radius: 0;
+  margin-bottom: -1px;
+}
+#password{
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+#fp-email{
+  margin-bottom: 10px;
+}
