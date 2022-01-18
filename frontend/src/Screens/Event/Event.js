@@ -4,7 +4,7 @@ import axios from "axios";
 
 import "./Event.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEvent } from "../../actions/eventAction";
+import { deleteEvent, listEvent } from "../../actions/eventAction";
 import ErrorMessage from "../../components/Error";
 import Loading from "../../components/Loading";
 import { Button } from "react-bootstrap";
@@ -18,6 +18,17 @@ const Event = () => {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  console.log(userInfo);
+
+  const eventDelete = useSelector((state) => state.eventDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = eventDelete;
+
   useEffect(() => {
     const fetching = async () => {
       const { data } = await axios.get(`/events/${Id}`);
@@ -30,12 +41,12 @@ const Event = () => {
     fetching();
   }, [Id]);
 
-  const eventDelete = useSelector((state) => state.eventDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = eventDelete;
+  useEffect(() => {
+    dispatch(listEvent());
+    if (userInfo === null) {
+      navigate("/login");
+    }
+  }, [dispatch, navigate, userInfo]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure")) {

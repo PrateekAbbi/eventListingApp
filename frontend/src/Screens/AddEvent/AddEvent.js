@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,13 +9,23 @@ const AddEvent = () => {
   const [title, setTitle] = useState("");
   const [eventBody, setEventBody] = useState("");
 
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const eventCreate = useSelector((state) => state.eventCreate);
   const { loading, error, event } = eventCreate;
   console.log(event);
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  console.log(userInfo);
+
+  useEffect(() => {
+    dispatch(createEvent());
+    if (userInfo === null) {
+      navigate("/login");
+    }
+  }, [dispatch, navigate, userInfo]);
 
   const resetHandler = () => {
     setTitle("");

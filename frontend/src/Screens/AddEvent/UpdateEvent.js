@@ -33,6 +33,17 @@ const UpdateEvent = () => {
     fetching();
   }, [Id, date]);
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  console.log(userInfo);
+
+  useEffect(() => {
+    dispatch(updateEvent(), deleteEvent());
+    if (userInfo === null) {
+      navigate("/login");
+    }
+  }, [dispatch, navigate, userInfo]);
+
   const resetHandler = () => {
     setTitle("");
     setBody("");
@@ -69,10 +80,6 @@ const UpdateEvent = () => {
         <Card.Header>Edit your event</Card.Header>
         <Card.Body>
           <Form onSubmit={updateHandler}>
-            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            {errorDelete && (
-              <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-            )}
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
