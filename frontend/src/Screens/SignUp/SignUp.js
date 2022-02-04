@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/Error";
 import { registerUser } from "../../actions/userAction";
@@ -35,53 +39,81 @@ const SignUp = () => {
     <div className="text-center">
       <div className="greeting">
         <h1>Hello {name}, we are happy to see you😊</h1>
-        <br />
         <p>{username}</p>
         <p>{password}</p>
       </div>
       {loading && <Loading />}
-      <form className="form-signup" onSubmit={submitHandler}>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        className="form-signup"
+        onSubmit={submitHandler}
+      >
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        <input
-          type={"text"}
-          id="fullName"
-          className="form-control"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          name="name"
-          placeholder="Your full name"
+        <br />
+        <TextField
           required
+          id="outlined-required"
+          label="Full Name"
+          variant="outlined"
+          type={"text"}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          name="name"
           autoFocus
         />
-        <input
+        <TextField
+          required
+          id="outlined-required"
+          label="Email Address"
+          variant="outlined"
           type={"email"}
-          id="inputEmail"
-          className="form-control"
-          onChange={(e) => setUsername(e.target.value)}
           value={username}
+          onChange={(e) => setUsername(e.target.value)}
           name="username"
-          placeholder="Your Email Address"
           required
         />
-        <input
+        <TextField
+          required
+          id="outlined-required"
+          label="Password"
+          variant="outlined"
           type={"password"}
-          id="password"
-          className="form-control"
-          onChange={(e) => setPassword(e.target.value)}
           value={password}
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
-          placeholder="Your password"
           required
         />
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          size="large"
+          style={{ width: "85.5%" }}
+          className="cursive lsbtn"
+        >
           Sign Up
-        </button>
-        <div className="signup">
-          <Link to="/logIn" className="btn btn-lg btn-primary btn-block">
-            Already have an account - Sign In
-          </Link>
-        </div>
-      </form>
+        </Button>
+        <Typography
+          style={{ margin: "-6.5px", width: "104%", fontSize: "15px" }}
+          className="cursive"
+        >
+          or
+        </Typography>
+        <Button
+          className="logIn"
+          variant="contained"
+          size="large"
+          style={{ width: "85.5%" }}
+          href="/logIn"
+          className="cursive lsbtn"
+        >
+          Log In
+        </Button>
+      </Box>
     </div>
   );
 };

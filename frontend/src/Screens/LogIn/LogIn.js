@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import Loading from "../../components/Loading";
+import { Typography } from "@mui/material";
 import ErrorMessage from "../../components/Error";
 
 import "./LogIn.css";
@@ -33,43 +37,72 @@ const LogIn = () => {
     <div className="text-center">
       <div className="greeting">
         <h1>Hello, Please Enter your credentials</h1>
-        <br />
         <p>{username}</p>
         <p>{password}</p>
       </div>
       {loading && <Loading />}
-      <form className="form-signup" onSubmit={submitHandler}>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        className="form-signup"
+        onSubmit={submitHandler}
+      >
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        <input
+        <br />
+        <TextField
+          required
+          id="outlined-required"
+          label="Email Address"
+          variant="outlined"
           type={"email"}
-          id="fullName"
-          className="form-control"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
           value={username}
           name="username"
-          placeholder="Your email address"
-          required
           autoFocus
         />
-        <input
+        <TextField
+          required
+          id="outline-required"
+          label="Password"
+          variant="outlined"
           type={"password"}
-          id="password"
-          className="form-control"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           name="password"
-          placeholder="Your password"
           required
         />
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          size="large"
+          style={{ width: "85.5%" }}
+          className="cursive lsbtn"
+        >
           Log In
-        </button>
-        <div className="logIn">
-          <Link to="/signUp" className="btn btn-lg btn-primary btn-block">
-            Don't have an account - Sign Up
-          </Link>
-        </div>
-      </form>
+        </Button>
+        <Typography
+          style={{ margin: "-6.5px", width: "104%", fontSize: "15px" }}
+          className="cursive"
+        >
+          or
+        </Typography>
+        <Button
+          className="logIn"
+          variant="contained"
+          size="large"
+          style={{ width: "85.5%" }}
+          href="/signUp"
+          className="cursive lsbtn"
+        >
+          Sign Up
+        </Button>
+      </Box>
     </div>
   );
 };

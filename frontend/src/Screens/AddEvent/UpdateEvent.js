@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteEvent, updateEvent } from "../../actions/eventAction";
-import Error from "../../components/Error";
 import Loading from "../../components/Loading";
-import ErrorMessage from "../../components/Error";
 
 const UpdateEvent = () => {
   let { Id } = useParams();
@@ -81,11 +80,15 @@ const UpdateEvent = () => {
         <Card.Body>
           <Form onSubmit={updateHandler}>
             <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>
+                <b>Title</b>
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter the title"
                 value={title}
+                className="cursive"
+                style={{ fontSize: "15px" }}
                 onChange={(e) => setTitle(e.target.value)}
               />
               <br />
@@ -93,24 +96,35 @@ const UpdateEvent = () => {
             {loading && <Loading size={50} />}
             {loadingDelete && <Loading />}
             <Form.Group controlId="body">
-              <Form.Label>Body</Form.Label>
+              <Form.Label>
+                <b>Body</b>
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder="Enter the body"
                 rows={4}
                 value={body}
+                className="cursive"
+                style={{ fontSize: "15px" }}
                 onChange={(e) => setBody(e.target.value)}
               />
               <br />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className="btn cursive"
+            >
               Update this Event
             </Button>
             <Button
               className="mx-2"
-              variant="danger"
+              variant="contained"
+              color="error"
               style={{ marginLeft: "10px" }}
               onClick={() => deleteHandler(Id)}
+              className="btn cursive"
             >
               Delete this event
             </Button>
